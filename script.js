@@ -299,12 +299,34 @@ function showEndingScreen() {
     });
 }
 
+
+
+function scrollToTop() {
+    if ('scrollBehavior' in document.documentElement.style) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+}
+
+function resetScroll() {
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+        document.body.style.overflow = '';
+        window.scrollTo(0, 0);
+    }, 50);
+}
+
 function switchScreen(hideScreenId, showScreenId) {
     document.getElementById(hideScreenId).classList.remove('active');
     document.getElementById(showScreenId).classList.add('active');
-    
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    resetScroll();
 }
+
+
+
 
 
 function shuffle(array) {
