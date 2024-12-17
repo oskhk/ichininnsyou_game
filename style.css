@@ -48,14 +48,51 @@ html, body {
     }
 }
 @media (max-width: 768px) {
-    .screen {
-        padding: 20px;
+    body {
+        font-size: 14px;
     }
+
+    .screen {
+        padding: 10px;
+        margin: 20px auto;
+    }
+
+    .image-area {
+        aspect-ratio: 4 / 3;
+        max-width: 100%;
+    }
+
+    .speech-bubble {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+        max-width: 90%;
+    }
+
+    .speech-bubble.left {
+        top: 5%;
+        left: 3%;
+    }
+
+    .speech-bubble.right {
+        top: 25%;
+        right: 3%;
+    }
+
     h1 {
-        font-size: 2.4rem;
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    .start-btn, .option {
+        font-size: 1rem;
+        padding: 10px 12px;
+    }
+
+    .result-mark {
+        max-width: 60%;
+        max-height: 60%;
     }
 }
-
 h1 {
     text-align: center;
     margin: 0 auto;
@@ -199,13 +236,12 @@ h1 {
 .image-area {
     position: relative;
     width: 100%;
-    max-width: 800px;
+    max-width: 600px;
     aspect-ratio: 16 / 9;
-    margin: 0 auto 24px;
-    background-color: #f5f5f5;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin: 0 auto 16px;
     overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -235,15 +271,13 @@ h1 {
 }
 
 .speech-bubble.left {
-    align-self: flex-start; 
-    background: #e8f4ff;
-    border-radius: 12px 12px 12px 0; 
+    top: 10%;
+    left: 5%;
 }
 
 .speech-bubble.right {
-    align-self: flex-end;
-    background: #dfffd6;
-    border-radius: 12px 12px 0 12px;
+    top: 30%;
+    right: 5%;
 }
 
 .character-image {
@@ -251,7 +285,6 @@ h1 {
     height: 100%;
     object-fit: contain;
     object-position: center;
-    display: block;
 }
 
 .response, .feedback {
@@ -272,13 +305,13 @@ h1 {
 .speech-bubble {
     position: absolute;
     background: #ffffff;
-    padding: 16px;
+    padding: 8px 12px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 75%;
-    line-height: 1.8;
-    font-size: 1rem;
-    animation: fadeIn 0.5s ease-in-out;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    max-width: 80%;
+    word-break: break-word;
 }
 
 .speech-bubble.left {
