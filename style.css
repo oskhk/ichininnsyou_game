@@ -9,6 +9,7 @@ header {
 }
 
 html, body {
+    scroll-behavior: smooth;
     height: 100%;
     font-family: 'SF Pro Display', 'Noto Sans JP', sans-serif;
     background: linear-gradient(180deg, #fefefe 0%, #f5f5f5 100%);
