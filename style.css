@@ -494,10 +494,14 @@ h1 {
             max-width: 80%; 
         }
     
-        .speech-bubble.left, .speech-bubble.right {
-            top: auto;
-            position: relative;
-            margin: 5px auto;
+        .speech-bubble.left {
+            top: 5%; 
+            left: 3%;
+        }
+    
+        .speech-bubble.right {
+            top: 25%; 
+            right: 3%;
         }
     
         h1 {
