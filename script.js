@@ -54,108 +54,14 @@ function switchScreen(hideScreenId, showScreenId) {
 }
 
 function loadStage(stage) {
-    document.getElementById('scenarioTitle').textContent = stage.title;
-    document.getElementById('scenarioDescription').textContent = stage.description;
+    answers[currentStage] = undefined;
 
-    const playerName = document.getElementById('playerName').value || 'あなた';
-    const responseText = stage.response.replace(/{name}/g, playerName);
-    document.getElementById('response').textContent = responseText;
-
-    const imageArea = document.getElementById('imageArea');
-    imageArea.innerHTML = '';
-
-    preloadImage(stage.image)
-        .then(img => {
-            img.alt = "キャラクター";
-            img.className = 'character-image';
-            imageArea.appendChild(img);
-        })
-        .catch(error => {
-            console.error('画像のロードに失敗しました:', error);
-        });
-
-    stage.bubbles.forEach((bubbleText, index) => {
-        const bubble = document.createElement('div');
-        bubble.className = 'speech-bubble';
-        bubble.textContent = bubbleText.replace(/{name}/g, playerName);
-        bubble.style.display = 'none';
-        imageArea.appendChild(bubble);
-    });
-
-    currentBubbleIndex = 0;
-    document.getElementById('feedback').textContent = '';
-
-    const optionsContainer = document.getElementById('optionsContainer');
-    optionsContainer.innerHTML = '';
-
-    const randomizedOptions = [...stage.options].sort(() => Math.random() - 0.5);
-    randomizedOptions.forEach((optionText, index) => {
-        const button = document.createElement('button');
-        button.className = 'option';
-        button.textContent = optionText;
-        button.onclick = () => {
-            selectOption(index, stage, stage.feedback[stage.options.indexOf(optionText)]);
-        };
-        optionsContainer.appendChild(button);
-    });
-
-    setupNextStageButton();
-    setupResetBubbleButton(imageArea);
-    setupEventHandlers(imageArea);
-    updateProgress();
-
-    const backToEndingButton = document.getElementById('backButton');
-    if (cameFromEndingScreen) {
-        backToEndingButton.style.display = 'block';
-        backToEndingButton.onclick = () => {
-            switchScreen('gameScreen', 'endingScreen');
-        };
-    } else {
-        backToEndingButton.style.display = 'none';
-    }
-}
-
-function preloadImage(src) {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve(img);
-        img.onerror = reject;
-        img.src = src;
-    });
-}
-
-function setupEventHandlers(imageArea) {
-    const bubbles = imageArea.querySelectorAll('.speech-bubble');
-    currentBubbleIndex = 0;
-
-    imageArea.removeEventListener('click', imageArea.onclick);
-
-    imageArea.onclick = () => {
-        if (currentBubbleIndex < bubbles.length) {
-            const bubble = bubbles[currentBubbleIndex];
-            bubble.style.display = 'block';
-
-            const isLeft = currentBubbleIndex % 2 === 0;
-            bubble.classList.toggle('left', isLeft);
-            bubble.classList.toggle('right', !isLeft);
-
-            bubble.style.top = `${currentBubbleIndex * 80}px`;
-            currentBubbleIndex++;
-        }
-    };
-}
-
-function highlightPlaceholder(text) {
-    return text.replace(/\(　\?　\)/g, '<span class="highlight">(　?　)</span>');
-}
-
-function loadStage(stage) {
     document.getElementById('scenarioTitle').textContent = stage.title;
     document.getElementById('scenarioDescription').textContent = stage.description;
 
     const playerName = document.getElementById('playerName').value || 'あなた';
     const responseText = highlightPlaceholder(stage.response.replace(/{name}/g, playerName));
-    document.getElementById('response').innerHTML = responseText; 
+    document.getElementById('response').innerHTML = responseText;
 
     const imageArea = document.getElementById('imageArea');
     imageArea.innerHTML = '';
@@ -195,11 +101,6 @@ function loadStage(stage) {
         optionsContainer.appendChild(button);
     });
 
-    setupNextStageButton();
-    setupResetBubbleButton(imageArea);
-    setupEventHandlers(imageArea);
-    updateProgress();
-
     const backToEndingButton = document.getElementById('backButton');
     if (cameFromEndingScreen) {
         backToEndingButton.style.display = 'block';
@@ -209,9 +110,48 @@ function loadStage(stage) {
     } else {
         backToEndingButton.style.display = 'none';
     }
+
+    setupNextStageButton();
+    setupResetBubbleButton(imageArea);
+    setupEventHandlers(imageArea);
+    updateProgress();
 }
 
 
+
+function preloadImage(src) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+    });
+}
+
+function setupEventHandlers(imageArea) {
+    const bubbles = imageArea.querySelectorAll('.speech-bubble');
+    currentBubbleIndex = 0;
+
+    imageArea.removeEventListener('click', imageArea.onclick);
+
+    imageArea.onclick = () => {
+        if (currentBubbleIndex < bubbles.length) {
+            const bubble = bubbles[currentBubbleIndex];
+            bubble.style.display = 'block';
+
+            const isLeft = currentBubbleIndex % 2 === 0;
+            bubble.classList.toggle('left', isLeft);
+            bubble.classList.toggle('right', !isLeft);
+
+            bubble.style.top = `${currentBubbleIndex * 80}px`;
+            currentBubbleIndex++;
+        }
+    };
+}
+
+function highlightPlaceholder(text) {
+    return text.replace(/\(　\?　\)/g, '<span class="highlight">(　?　)</span>');
+}
 
 function setupNextStageButton() {
     const nextStageButton = document.getElementById('nextStageButton');
@@ -227,6 +167,10 @@ function setupNextStageButton() {
 }
 
 function selectOption(optionIndex, stage, feedback) {
+    if (answers[currentStage] !== undefined) {
+        return;
+    }
+
     const selectedAnswer = stage.options[optionIndex];
 
     if (stage.correctAnswer.includes(selectedAnswer)) {
@@ -242,6 +186,7 @@ function selectOption(optionIndex, stage, feedback) {
     const nextStageButton = document.getElementById('nextStageButton');
     nextStageButton.style.display = 'block';
 }
+
 
 function setupResetBubbleButton(imageArea) {
     const resetBubbleButton = document.getElementById('resetBubbleButton');
