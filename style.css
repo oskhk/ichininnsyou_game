@@ -497,17 +497,17 @@ img, .speech-bubble {
             line-height: 1.2;
             word-wrap: break-word;
             max-width: 80%; 
-            margin: 4px auto;
+            margin: 2px auto;
         }
     
         .speech-bubble.left {
             top: auto;
-            margin-top: 4px;
+            margin-top: 2px;
         }
     
         .speech-bubble.right {
             top: auto;
-            margin-top: 4px;
+            margin-top: 2px;
         }
     
         h1 {
