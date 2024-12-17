@@ -299,6 +299,14 @@ function showEndingScreen() {
     });
 }
 
+function switchScreen(hideScreenId, showScreenId) {
+    document.getElementById(hideScreenId).classList.remove('active');
+    document.getElementById(showScreenId).classList.add('active');
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
