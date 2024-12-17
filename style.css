@@ -492,11 +492,12 @@ img, .speech-bubble {
         }
     
         .speech-bubble {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             padding: 5px 8px;
             line-height: 1.2;
             word-wrap: break-word;
             max-width: 80%; 
+            margin: 4px auto;
         }
     
         .speech-bubble.left {
