@@ -213,18 +213,6 @@ h1 {
     word-break: break-word; 
 }
 
-.speech-bubble::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 15px;
-    border-width: 10px;
-    border-style: solid;
-    border-color: #ffffff transparent transparent transparent;
-    z-index: 1;
-    transform: rotate(180deg);
-}
-
 .speech-bubble.left {
     top: 10%;
     left: 5%;
