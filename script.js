@@ -132,8 +132,6 @@ function setupEventHandlers(imageArea) {
     const bubbles = imageArea.querySelectorAll('.speech-bubble');
     currentBubbleIndex = 0;
 
-    imageArea.removeEventListener('click', imageArea.onclick);
-
     imageArea.onclick = () => {
         if (currentBubbleIndex < bubbles.length) {
             const bubble = bubbles[currentBubbleIndex];
@@ -148,6 +146,7 @@ function setupEventHandlers(imageArea) {
         }
     };
 }
+
 
 function highlightPlaceholder(text) {
     return text.replace(/\(　\?　\)/g, '<span class="highlight">(　?　)</span>');
