@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本語一人称シミュレーションゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>日本語の”一人称”シミュレーションゲーム</h1>
+        <h2>一人称を適切に使い分けてみよう</h2>
+
+    </header>
+
+    <section id="startScreen" class="screen active">
+        <img id="welcomeImage" src="im/images-7.jpg" alt="ウェルカム画像" class="welcome-image">
+        <input id="playerName" type="text" placeholder="お名前を入力してください" class="name-input" aria-label="名前を入力してください">
+        <div class="gender-selection">
+            <button id="maleButton" class="gender-btn">男性</button>
+            <button id="femaleButton" class="gender-btn">女性</button>
+        </div>
+        <button id="startButton" class="start-btn">ゲームスタート</button>
+        <p class="game-instructions">画像をクリックしてセリフを進め、正しい選択肢を選んでください。</p>
+        <p class="disclaimer">このゲームの内容は参考用です。実際の日本語の使用と異なる可能性があります。</p>
+    </section>
+
+    <section id="gameScreen" class="screen">
+        <div class="title">
+            <h1 id="scenarioTitle"></h1>
+            <p id="scenarioDescription" class="scenario-description"></p>
+            <div class="stage-info">
+                <p>進行: <span id="stageProgressCount">0</span> / <span id="totalStageCount">20</span></p>
+                <p>正解: <span id="stageClearCount">0</span></p>
+            </div>
+        </div>
+        <div id="imageArea" class="image-area">
+            <img src="" alt="キャラクター画像" id="characterImage" class="character-image">
+        </div>
+        <div id="response" class="response"></div>
+        <div id="optionsContainer" class="options"></div>
+        <div id="feedback" class="feedback"></div>
+        <button id="resetBubbleButton" class="back-btn" style="display: none;">リセット</button>
+        <button id="nextStageButton" class="next-btn" style="display: none;">次のステージへ</button>
+        <button id="backButton" class="back-btn" style="display: none;">結果画面に戻る</button>
+    </section>
+
+    <section id="endingScreen" class="screen">
+        <h1>ゲーム終了！</h1>
+        <img src="im/gd.jpg" alt="終了画面イメージ" class="ending-image">
+        <p id="scoreSummary"></p>
+        <p class="review-instruction">間違えたステージを確認してみましょう。</p>
+        <div id="incorrectStages"></div>
+        <button id="retryButton" class="retry-btn">リトライ</button>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
